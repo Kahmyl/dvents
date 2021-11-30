@@ -6,7 +6,7 @@
       [
         "styled-components",
         {
-          "ssr": true,
+          "csr": true,
           "displayName": true,
           "preprocess": false
         }

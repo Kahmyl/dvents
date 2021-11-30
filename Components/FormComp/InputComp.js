@@ -1,7 +1,4 @@
 import styled from "styled-components";
-export default function Input({ type, placeholder }) {
-  return <StyledInput type={type} placeholder={placeholder} />;
-}
 
 const StyledInput = styled.input`
   background: rgba(255, 255, 255, 0.15);
@@ -27,3 +24,9 @@ const StyledInput = styled.input`
     font-size: 1rem;
   }
 `;
+
+export default function Input({ type, placeholder, value, onChange }) {
+  return <StyledInput type={type} placeholder={placeholder} value={value} onChange={onChange} />;
+}
+
+

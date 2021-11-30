@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const MainContainer = styled.div`
+export const MainContainer = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;

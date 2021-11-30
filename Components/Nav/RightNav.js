@@ -31,8 +31,8 @@ const RightNav = ({ open }) => {
       <li><Link href="/"><a>Home</a></Link></li>
       <li><Link href=""><a>About Us</a></Link></li>
       <li><Link href=""><a>Contact Us</a></Link></li>
-      <li><Link href=""><a>Sign In</a></Link></li>
-      <li><Link href="/Auth"><a>Sign Up</a></Link></li>
+      <li><Link href="/User/Login"><a>Sign In</a></Link></li>
+      <li><Link href="/User"><a>Sign Up</a></Link></li>
     </Ul>
   )
 }
