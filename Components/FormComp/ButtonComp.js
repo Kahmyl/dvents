@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default function Button({ content }) {
-  return <StyledButton>{content}</StyledButton>;
+export default function Button({ content, disabled }) {
+  return <StyledButton disabled={disabled}>{content}</StyledButton>;
 }
 
 const StyledButton = styled.button`

@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
 import Input from "../../Components/FormComp/InputComp";
-import { createUserMutation, GetUsers} from "../../queries/UserQueries";
+import { createUserMutation} from "../../queries/UserQueries";
 
 import {
     MainContainer, 
@@ -20,10 +20,6 @@ import {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [signup, setSignup] = useState('Sign Up')
-  
-  const [createUser, { data, loading, error }] = useMutation(createUserMutation);
-
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -32,23 +28,19 @@ import {
         username: username,
         email: email,
         password: password
-      },
-      refetchQueries: [ { query: GetUsers }]
+      }
     })
-
-    if (loading) {
-      setSignup('Loading...')
-    }
-    if (error) {
-      return error.message
-    }
-
-    if(createUser){
-      console.log(data)
-      console.log(createUser.username)
-    }
   }
+  
+  const [createUser] = useMutation(createUserMutation, {
+    onCompleted: (data) => {
+      console.log(data)
+    }
+  });
 
+
+
+  
     return ( 
     <div>
         <div>
@@ -70,7 +62,7 @@ import {
             onChange={(e) => setPassword(e.target.value)} />
           </InputContainer>
           <ButtonContainer>
-            <Button content={signup} />
+            <Button content="Sign up" />
           </ButtonContainer>
           <LoginWith><Link href="/User/Login"><a>login</a></Link></LoginWith>
           <HorizontalRule />

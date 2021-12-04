@@ -1,11 +1,14 @@
 import Navbar from "../../Components/Nav/Navbar";
-const Event = () => {
-    return ( 
-        <div>
-            <Navbar/><br/>
-            Events
-        </div>
-     );
+import ClientOnly from "../../components/ClientOnly";
+import Events from '../../components/Events';
+
+export default function Home() {
+  return (
+    <div>
+       <Navbar/>
+       <ClientOnly>
+         <Events />
+       </ClientOnly>
+    </div>
+  )
 }
- 
-export default Event;

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { useContext } from 'react';
 import Link from 'next/link'
+import UserContext from '../../context/UserContext'
 
 const Ul = styled.ul`
   list-style: none;
@@ -25,16 +27,20 @@ const Ul = styled.ul`
   }
 `;
 
+
 const RightNav = ({ open }) => {
-  return (
-    <Ul open={open}>
-      <li><Link href="/"><a>Home</a></Link></li>
-      <li><Link href=""><a>About Us</a></Link></li>
-      <li><Link href=""><a>Contact Us</a></Link></li>
-      <li><Link href="/User/Login"><a>Sign In</a></Link></li>
-      <li><Link href="/User"><a>Sign Up</a></Link></li>
-    </Ul>
-  )
+  const user = useContext(UserContext);
+
+    return (
+      <Ul open={open}>
+        <li><Link href="/"><a>Home</a></Link></li>
+        <li><Link href=""><a>About Us</a></Link></li>
+        <li><Link href=""><a>Contact Us</a></Link></li>
+        {user.username.username && <li><Link href="/User"><a>{user.username.username}</a></Link></li>}
+        {!user.username.username && <li><Link href="/User/Login"><a>Sign In</a></Link></li>}
+        {!user.username.username && <li><Link href="/User"><a> Sign Up </a></Link></li>}
+      </Ul>
+    )
 }
 
 export default RightNav
