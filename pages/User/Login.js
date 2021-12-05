@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useMutation } from "@apollo/client";
 import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
 import Input from "../../Components/FormComp/InputComp";
 import {LoginUserMutation} from "../../queries/UserQueries";
-import UserContext from "../../context/UserContext"
+import Router from 'next/router'
 import {
     MainContainer, 
     WelcomeText, 
@@ -21,8 +21,6 @@ const Login = () => {
   const [identity, setIdentity] = useState('')
   const [password, setPassword] = useState('')
 
-  // const context = useContext(UserContext)
-
   const handleSubmit = (e) => {
     e.preventDefault()
     loginUser({
@@ -37,11 +35,6 @@ const Login = () => {
   const [loginUser] = useMutation(LoginUserMutation, {
     onCompleted: (data) => {
       if(data.loginUser.token){
-        // context.token.setToken(data.loginUser.token)
-        // context.email.setEmail(data.loginUser.email)
-        // context.username.setUsername(data.loginUser.username)
-        // context.userId.setUserId(data.loginUser.userId)
-
         const apiData = {token:data.loginUser.token, email:data.loginUser.email, userId:data.loginUser.userId, username:data.loginUser.username}
         
         fetch("/api/login", {
@@ -51,7 +44,9 @@ const Login = () => {
           },
           body: JSON.stringify(apiData)
         })
-        
+        .then((response) =>{
+          Router.push('/')
+        })
       }
     }
   });

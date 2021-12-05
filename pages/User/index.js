@@ -5,6 +5,7 @@ import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
 import Input from "../../Components/FormComp/InputComp";
 import { createUserMutation} from "../../queries/UserQueries";
+import Router from 'next/router'
 
 import {
     MainContainer, 
@@ -34,7 +35,20 @@ import {
   
   const [createUser] = useMutation(createUserMutation, {
     onCompleted: (data) => {
-      console.log(data)
+      if(data.createUser.token){
+        const apiData = {token:data.createUser.token, email:data.createUser.email, userId:data.createUser.userId, username:data.createUser.username}
+        
+        fetch("/api/login", {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(apiData)
+        })
+        .then((response) =>{
+          Router.push('/')
+        })
+      }
     }
   });
 

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useContext } from 'react';
 import Link from 'next/link'
 import UserContext from '../../context/UserContext'
+import Router from 'next/router'
 
 const Ul = styled.ul`
   list-style: none;
@@ -31,12 +32,26 @@ const Ul = styled.ul`
 const RightNav = ({ open }) => {
   const user = useContext(UserContext);
 
+  const Logout = () => {
+    fetch("/api/logout", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify()
+    })
+    .then((response) => {
+      Router.reload()
+    })
+  }
+
     return (
       <Ul open={open}>
         <li><Link href="/"><a>Home</a></Link></li>
-        <li><Link href=""><a>About Us</a></Link></li>
-        <li><Link href=""><a>Contact Us</a></Link></li>
-        {user.username.username && <li><Link href="/User"><a>{user.username.username}</a></Link></li>}
+        <li><Link href="/Events"><a>Events</a></Link></li>
+        <li><Link href="/Bookings"><a>Tickets</a></Link></li>
+        <li><Link href="/Events/createEvent"><a>New Event</a></Link></li>
+        {user.username.username && <li onClick={Logout}>{user.username.username}</li>}
         {!user.username.username && <li><Link href="/User/Login"><a>Sign In</a></Link></li>}
         {!user.username.username && <li><Link href="/User"><a> Sign Up </a></Link></li>}
       </Ul>

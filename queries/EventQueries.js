@@ -28,7 +28,7 @@ export const GetEventDetails = gql`
 `
 
 export const CreateEvents = gql`
-    mutation ($title: String!, $description: String!, $price: Float!, $user: ID!){
+    mutation ($title: String!, $description: String!, $price: String!, $user: ID!){
       createEvent(title: $title, description: $description, price: $price, user: $user){
         title
         description

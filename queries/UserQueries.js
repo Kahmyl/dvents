@@ -27,6 +27,7 @@ export const LoginUserMutation = gql`
       loginUser(identity: $identity, password: $password){
         userId
         username
+        email
         token
         tokenExpiration
       }
