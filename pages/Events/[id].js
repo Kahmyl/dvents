@@ -1,7 +1,7 @@
 import Navbar from "../../Components/Nav/Navbar"
 import { useQuery } from "@apollo/client";
 import { GetEventDetails } from "../../queries/EventQueries";
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import styles from "../../styles/Home.module.css";
 import { useState } from "react";
 
@@ -27,6 +27,7 @@ const EventDetails = () => {
             <p>{event.description}</p>
             <p>{event.price}</p>
             <p>{event.date}</p>
+            <p><button onClick={()=>Router.push(`/Events/purchase?id=${id}`)}>Book Ticket</button></p>
           </div>
         </div>
      );

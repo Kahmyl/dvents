@@ -3,6 +3,7 @@ import axios from "axios"
 import { ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
 import { useState, useEffect } from 'react';
 import UserContext from '../context/UserContext';
+import Head from 'next/head'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql/',
@@ -31,6 +32,9 @@ function MyApp({ Component, pageProps }) {
         email:{email, setEmail}, 
         username:{username, setUsername}
       }}>
+      <Head>
+        <title>Dvent</title>
+      </Head>
       <ApolloProvider client={client}>
         <Component {...pageProps} />
       </ApolloProvider>
