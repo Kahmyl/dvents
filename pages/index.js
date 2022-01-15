@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Navbar from '../Components/Nav/Navbar'
-import ClientOnly from "../components/ClientOnly";
 import { Container, Wrapper } from '../Components/Global'
 import Slider from '../Components/Slider';
 
@@ -24,13 +23,11 @@ export default function Home() {
   return (
     <div>
        <Navbar/>
-       <ClientOnly>
           <Container>
             <Wrapper>
               <Slider config={config} />
             </Wrapper>
           </Container>
-       </ClientOnly>
     </div>
   )
 }
