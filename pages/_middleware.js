@@ -4,5 +4,10 @@ export async function middleware(req, ev) {
     if (pathname == '/Events/createEvent' && !req.cookies.token) {
         return NextResponse.redirect('/User/Login')
     }
+
+    if (pathname == '/Events/Bookings' && !req.cookies.token) {
+        return NextResponse.redirect('/User/Login')
+    }
+
     return NextResponse.next()
 }
