@@ -3,18 +3,25 @@ import { useContext } from 'react';
 import Link from 'next/link'
 import UserContext from '../../context/UserContext'
 import Router from 'next/router'
+import { DropContainer } from '../Dropdown/DropStyle';
+import { FaCaretDown, FaSignOutAlt } from "react-icons/fa";
+import { NamePlate } from '../Global';
+
+
 
 const Ul = styled.ul`
   list-style: none;
   display: flex;
+  align-items: center;
   flex-flow: row nowrap;
   li {
-    padding: 1px 20px;
+    padding: 15px 20px;
   }
   @media (max-width: 768px) {
     flex-flow: column nowrap;
     background-color: #0D2538;
     position: fixed;
+    z-index: 4;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
     top: 0;
     right: 0;
@@ -24,9 +31,15 @@ const Ul = styled.ul`
     transition: transform 0.3s ease-in-out;
     li {
       color: #fff;
+      padding: 20px 20px;
     }
   }
 `;
+
+export const LogOutIcon = styled(FaSignOutAlt)`
+padding-left: 3px;
+font-size: 15px;
+`
 
 
 const RightNav = ({ open }) => {
@@ -51,9 +64,9 @@ const RightNav = ({ open }) => {
         <li><Link href="/Events"><a>Events</a></Link></li>
         <li><Link href="/Bookings"><a>Tickets</a></Link></li>
         <li><Link href="/Events/createEvent"><a>New Event</a></Link></li>
-        {user.username.username && <li onClick={Logout}>{user.username.username}</li>}
+        {user.username.username && <li onClick={Logout}><DropContainer>Logout<LogOutIcon/></DropContainer></li>}
         {!user.username.username && <li><Link href="/User/Login"><a>Sign In</a></Link></li>}
-        {!user.username.username && <li><Link href="/User"><a> Sign Up </a></Link></li>}
+        {!user.username.username && <Link href="/User"><NamePlate><a> Sign Up </a></NamePlate></Link>}
       </Ul>
     )
 }

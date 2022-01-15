@@ -1,6 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { SiDeepnote } from "react-icons/si";
 
 export default class MyDocument extends Document {
     static getInitialProps({ renderPage }) {

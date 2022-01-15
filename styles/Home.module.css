@@ -70,10 +70,11 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 1200px;
 }
 
 .card {
+  cursor: pointer;
   margin: 1rem;
   padding: 1.5rem;
   text-align: left;
@@ -88,6 +89,7 @@
 .card:hover,
 .card:focus,
 .card:active {
+  cursor: pointer;
   color: #0070f3;
   border-color: #0070f3;
 }

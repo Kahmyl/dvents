@@ -6,7 +6,7 @@ import UserContext from '../context/UserContext';
 import Head from 'next/head'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql/',
+  uri: 'https://dvent.herokuapp.com/graphql/',
   cache: new InMemoryCache()
 });
 

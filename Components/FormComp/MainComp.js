@@ -38,7 +38,7 @@ export const MainContainer = styled.form`
   }
   @media only screen and (min-width: 1024px) {
     width: 70vw;
-    height: 50vh;
+    height: 60vh;
   }
   @media only screen and (min-width: 1280px) {
     width: 30vw;
@@ -56,7 +56,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 20%;
+
   width: 100%;
   padding-top: 20px;
 `;
@@ -93,3 +93,9 @@ export const IconsContainer = styled.div`
 export const ForgotPassword = styled.h4`
   cursor: pointer;
 `;
+
+export const Error = styled.p`
+color: crimson;
+text-align: center;
+padding: 5px;
+`
