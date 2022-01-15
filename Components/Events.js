@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useQuery } from "@apollo/client";
 import styles from "../styles/Home.module.css";
 import { GetEvents } from "../queries/EventQueries";
-import Router from 'next/router'
+
 
 export default function Events() {
 
