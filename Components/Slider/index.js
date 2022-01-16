@@ -20,7 +20,7 @@ const config = [
 const Slider = () => {
 
     return ( 
-        <Carousel autoPlay={true} emulateTouch={true} infiniteLoop={true}>
+        <Carousel showThumbs={false} autoPlay={true} emulateTouch={true} infiniteLoop={true}>
           {config && config.map(item =>(
             <SlideWrapper>
               <Image src={item.image}/>
