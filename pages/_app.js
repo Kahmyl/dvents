@@ -7,11 +7,11 @@ import Head from 'next/head'
 
 const link = createHttpLink({
   uri: 'https://dvent.herokuapp.com/graphql/',
-  credentials: 'include'
 });
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
+  credentials: 'include',
   link
 });
 
