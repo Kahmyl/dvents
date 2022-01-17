@@ -36,6 +36,7 @@ const Login = () => {
     onCompleted: (data) => {
       if(data.loginUser.username){
           user.username.setUsername(data.loginUser.username)
+          Router.push('/')
       }
     }
   });
