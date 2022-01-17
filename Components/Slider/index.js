@@ -22,7 +22,7 @@ const Slider = () => {
     return ( 
         <Carousel showThumbs={false} autoPlay={true} emulateTouch={true} infiniteLoop={true}>
           {config && config.map(item =>(
-            <SlideWrapper>
+            <SlideWrapper key={item.title}>
               <Image  src={item.image}/>
               <h2 className="legend">{item.title}</h2>
             </SlideWrapper>

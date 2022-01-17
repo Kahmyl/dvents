@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UserContext from '../../context/UserContext'
 import Link from "next/link";
 import { Formik } from 'formik';
 import { useMutation } from "@apollo/client";
@@ -25,25 +26,16 @@ const Login = () => {
   const [errorAuth, setErrorAuth] = useState('')
   const [isdisabled, setIsDisabled] = useState(false)
 
+  const user = useContext(UserContext)
+
   const [loginUser] = useMutation(LoginUserMutation, {
     onError: (error) => {
       setErrorAuth(error.message)
       setIsDisabled(false)
     },
     onCompleted: (data) => {
-      if(data.loginUser.token){
-        const apiData = {token:data.loginUser.token, email:data.loginUser.email, userId:data.loginUser.userId, username:data.loginUser.username}
-        
-        fetch("/api/login", {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(apiData)
-        })
-        .then((response) =>{
-          Router.push('/')
-        })
+      if(data.loginUser.username){
+          user.username.setUsername(data.loginUser.username)
       }
     }
   });

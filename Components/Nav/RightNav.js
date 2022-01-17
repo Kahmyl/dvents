@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { useMutation } from "@apollo/client";
 import { useContext } from 'react';
 import Link from 'next/link'
+import { logoutUserMutation } from '../../queries/UserQueries';
 import UserContext from '../../context/UserContext'
 import Router from 'next/router'
 import { DropContainer } from '../Dropdown/DropStyle';
@@ -45,16 +47,18 @@ font-size: 15px;
 const RightNav = ({ open }) => {
   const user = useContext(UserContext);
 
-  const Logout = () => {
-    fetch("/api/logout", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify()
-    })
-    .then((response) => {
+  const [LogoutUser] = useMutation(logoutUserMutation, {
+    onCompleted: (data) => {
+      user.username.setUsername(data.LogoutUser.username)
       Router.reload()
+    }
+  }) 
+
+  const Logout = () => {
+    LogoutUser({
+      variables: {
+        username: ""
+      }
     })
   }
 

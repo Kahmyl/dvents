@@ -1,13 +1,18 @@
 import '../styles/globals.css'
 import axios from "axios"
-import { ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink} from "@apollo/client";
 import { useState, useEffect } from 'react';
 import UserContext from '../context/UserContext';
 import Head from 'next/head'
 
-const client = new ApolloClient({
+const link = createHttpLink({
   uri: 'https://dvent.herokuapp.com/graphql/',
-  cache: new InMemoryCache()
+  credentials: 'include'
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link
 });
 
 function MyApp({ Component, pageProps }) {
@@ -16,14 +21,7 @@ function MyApp({ Component, pageProps }) {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   
-  useEffect(() => {
-    axios.get('/api/user')
-      .then(response => {
-        setUserId(response.data.userId)
-        setUsername(response.data.username)
-      })
-  })
-
+  
   return (
     <UserContext.Provider
       value={{
