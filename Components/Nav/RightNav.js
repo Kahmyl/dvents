@@ -68,7 +68,7 @@ const RightNav = ({ open }) => {
         <li><Link href="/Events"><a>Events</a></Link></li>
         <li><Link href="/Events/Bookings"><a>Tickets</a></Link></li>
         <li><Link href="/Events/createEvent"><a>New Event</a></Link></li>
-        {user.username.username && <li onClick={Logout}><DropContainer>Logout<LogOutIcon/></DropContainer></li>}
+        {user.username.username && <li><DropContainer>Logout<LogOutIcon/></DropContainer></li>}
         {!user.username.username && <li><Link href="/User/Login"><a>Sign In</a></Link></li>}
         {!user.username.username && <Link href="/User"><NamePlate><a> Sign Up </a></NamePlate></Link>}
       </Ul>
