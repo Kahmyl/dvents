@@ -47,20 +47,20 @@ font-size: 15px;
 const RightNav = ({ open }) => {
   const user = useContext(UserContext);
 
-  const [LogoutUser] = useMutation(logoutUserMutation, {
-    onCompleted: (data) => {
-      user.username.setUsername(data.LogoutUser.username)
-      Router.reload()
-    }
-  }) 
+  // const [LogoutUser] = useMutation(logoutUserMutation, {
+  //   onCompleted: (data) => {
+  //     user.username.setUsername(data.LogoutUser.username)
+  //     Router.reload()
+  //   }
+  // }) 
 
-  const Logout = () => {
-    LogoutUser({
-      variables: {
-        username: ""
-      }
-    })
-  }
+  // const Logout = () => {
+  //   LogoutUser({
+  //     variables: {
+  //       username: ""
+  //     }
+  //   })
+  // }
 
     return (
       <Ul open={open}>
