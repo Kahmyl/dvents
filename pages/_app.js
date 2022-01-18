@@ -7,6 +7,7 @@ import Head from 'next/head'
 
 const link = createHttpLink({
   uri: 'https://dvent.herokuapp.com/graphql/',
+  // uri: 'http://localhost:4000/graphql/'
 });
 
 const client = new ApolloClient({
