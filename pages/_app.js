@@ -6,13 +6,13 @@ import UserContext from '../context/UserContext';
 import Head from 'next/head'
 
 const link = createHttpLink({
-  // uri: 'http://localhost:4000/graphql/'
+  uri: 'https://dvent.herokuapp.com/graphql/',
 });
 
 const client = new ApolloClient({
-  uri: 'https://dvent.herokuapp.com/graphql/',
-  cache: new InMemoryCache(),
+  link,
   credentials: 'include',
+  cache: new InMemoryCache(),
 });
 
 function MyApp({ Component, pageProps }) {
