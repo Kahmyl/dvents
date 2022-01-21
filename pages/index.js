@@ -11,12 +11,6 @@ export default function Home() {
 
   const user = useContext(UserContext)
 
-  // const { error } = useQuery(findUser, {
-  //   onCompleted: (data) => {
-  //       user.username.setUsername(data.user.username)
-  //   }
-  // });
-
   
   
   return (
@@ -24,7 +18,7 @@ export default function Home() {
        <Navbar/>
           <Container>
             <Wrapper>
-              {/* <Slider /> */}
+              <Slider />
             </Wrapper>
           </Container>
     </div>
