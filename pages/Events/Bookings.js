@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useQuery } from "@apollo/client";
-import { GetTicket } from "../../queries/EventQueries";
+import { api } from "../../services/api";
+import { GetTicket, GetEvents } from "../../queries/EventQueries";
 import { useState, useEffect, useContext } from "react";
 import Navbar from "../../Components/Nav/Navbar";
 import UserContext from '../../context/UserContext'
@@ -10,40 +10,48 @@ const Bookings = () => {
 
     const [tickets, setTicket] = useState(null)
     const user = useContext(UserContext)
-    const { data, loading, error } = useQuery(GetTicket,  {
-        retry: true,
-        variables: { 
-            user : user.userId.userId
-        },
-    });
 
     useEffect(() => {
-        if(data){
-            setTicket(data.ticket)
+        const request = async () => {
+            await api.post('/', {
+                query: GetTicket,
+                variables: {
+                    user: user.userId.userId
+                }
+            })
+            .then(response => {
+                const data = response.data.data
+                if (data) {
+                    setTicket(data.ticket)
+                }
+            })
         }
-        
-    }, [data])
-    if (loading) {
-        return <Container><h2><a href="#loading" aria-hidden="true" className="aal_anchor" id="loading"></a>Loading...</h2></Container>;
+        request()
+    }, [user.userId.userId])
+
+    if (tickets && tickets.length == 0){
+        return <div><Navbar/><Container><p>No ticket found</p></Container></div>
     }
+
     return ( 
         <div>
             <Navbar/>
             <Container>
-                {/* {))} */}
                 {tickets && tickets.map((tickets) => (
                 <Ticket key={tickets._id}>
+                    {tickets.event ? 
                     <TicketInner>
                         <FrontFlip url={tickets.event.image}></FrontFlip>
                         <BackFlip>
                             <h1>{tickets.event.title}</h1>
                             <p>Ticket id: {tickets._id}</p>
                             <p>{tickets.user.username}</p>
-                          </BackFlip>
-                    </TicketInner>
+                        </BackFlip>
+                    </TicketInner>:
+                    <TicketInner> No ticket found </TicketInner>
+                    }
                 </Ticket>
                 ))}
-                
             </Container>
         </div>
      );

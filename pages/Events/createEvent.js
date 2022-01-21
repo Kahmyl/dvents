@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useMutation } from "@apollo/client";
 import { Formik } from 'formik';
 import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
@@ -9,6 +8,7 @@ import Router from 'next/router'
 import UserContext from '../../context/UserContext'
 import eventSchema from "../../Schema/eventSchema";
 import { ErrorText } from "../../Components/Global";
+import { api } from "../../services/api";
 import {
     MainContainer, 
     WelcomeText, 
@@ -23,19 +23,6 @@ const CreateEvent = () => {
     const [isdisabled, setIsDisabled] = useState(false)
 
     const user = useContext(UserContext)
-
-
-    const [createEvent] = useMutation(CreateEvents, {
-        onError: (error) => {
-          setIsDisabled(false)
-          setErrorAuth(error.message)
-        },
-        onCompleted: (data) => {
-            Router.push('/Events')
-        }
-    })
-
-
 
 
     return ( 
@@ -60,7 +47,9 @@ const CreateEvent = () => {
                 })
                 .then(res => res.json())
                 .then(data => {
-                  createEvent({
+                  
+                  api.post('/', { 
+                    query: CreateEvents, 
                     variables: {
                       title: values.title,
                       description: values.description,
@@ -69,6 +58,20 @@ const CreateEvent = () => {
                       image: data.secure_url,
                       date: values.date
                     }
+                  })
+                  .then(response => {
+                    if (response.data.errors){
+                      console.log(response.data.errors[0].message)
+                      setIsDisabled(false)
+                      throw response.data.errors[0].message
+                    }else{
+                      Router.push('/Events')
+                    }
+                    return
+                  })
+                  .catch((err) => {
+                    console.log(err)
+                    setErrorAuth(err)
                   })
                 })
                 .catch(err => console.log(err));

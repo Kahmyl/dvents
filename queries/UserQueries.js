@@ -1,6 +1,4 @@
-import { gql } from "@apollo/client";
-
-export const GetUsers = gql`
+export const GetUsers = `
   query{
     users {
       username
@@ -10,7 +8,7 @@ export const GetUsers = gql`
   }
 `;
 
-export const findUser = gql`
+export const findUser =`
   query{
     user {
       username
@@ -20,7 +18,7 @@ export const findUser = gql`
   }
 `;
 
-export const createUserMutation = gql`
+export const createUserMutation =`
     mutation ($username: String!, $email: String!, $password: String!) {
       createUser(username: $username, email: $email, password: $password){
         _id
@@ -32,7 +30,7 @@ export const createUserMutation = gql`
     }
 `;
 
-export const LoginUserMutation = gql`
+export const loginUserMutation =`
     mutation($identity: String!, $password: String!) {
       loginUser(identity: $identity, password: $password){
         userId
@@ -44,7 +42,7 @@ export const LoginUserMutation = gql`
     }
 `
 
-export const logoutUserMutation = gql`
+export const logoutUserMutation =`
   mutation($username: String!) {
     logoutUser(username: $username){
       username

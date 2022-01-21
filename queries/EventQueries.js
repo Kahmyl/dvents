@@ -1,6 +1,4 @@
-import { gql } from "@apollo/client";
-
-export const GetEvents = gql`
+export const GetEvents =`
   query {
     events {
         _id
@@ -13,7 +11,7 @@ export const GetEvents = gql`
   }
 `
 
-export const GetEventDetails = gql`
+export const GetEventDetails = `
   query($id: ID!) {
       event(_id: $id){
           title
@@ -30,7 +28,7 @@ export const GetEventDetails = gql`
   }
 `
 
-export const CreateEvents = gql`
+export const CreateEvents =`
     mutation ($title: String!, $description: String!, $price: String!, $image: String!, $date: String!, $user: ID!){
       createEvent(title: $title, description: $description, price: $price, image: $image, date: $date, user: $user){
         title
@@ -39,7 +37,7 @@ export const CreateEvents = gql`
     }
 `
 
-export const CreateBooking = gql`
+export const CreateBooking = `
     mutation ($user: ID!, $event: ID!){
       BookEvents(user: $user, event: $event){
         _id
@@ -47,9 +45,9 @@ export const CreateBooking = gql`
     }
 `
 
-export const Booking = gql`
-  query ($user: ID!, $event: ID!){
-    booking(user: $user, event: $event){
+export const Booking =`
+  query ($event: ID!){
+    booking(event: $event){
       user{
         username
       }
@@ -60,7 +58,7 @@ export const Booking = gql`
     }
   }
 `
-export const GetTicket = gql`
+export const GetTicket = `
 query($user: ID!){
   ticket(user: $user){
     _id

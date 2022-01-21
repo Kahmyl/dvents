@@ -2,14 +2,14 @@ import { useState, useContext } from "react";
 import UserContext from '../../context/UserContext'
 import Link from "next/link";
 import { Formik } from 'formik';
-import { useMutation } from "@apollo/client";
 import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
 import Input from "../../Components/FormComp/InputComp";
-import {LoginUserMutation} from "../../queries/UserQueries";
 import Router from 'next/router'
 import loginSchema from "../../Schema/loginSchema";
 import { ErrorText } from "../../Components/Global";
+import { api } from "../../services/api";
+import { loginUserMutation } from "../../queries/UserQueries";
 import {
     MainContainer, 
     WelcomeText, 
@@ -28,19 +28,6 @@ const Login = () => {
 
   const user = useContext(UserContext)
 
-  const [loginUser] = useMutation(LoginUserMutation, {
-    onError: (error) => {
-      setErrorAuth(error.message)
-      setIsDisabled(false)
-    },
-    onCompleted: (data) => {
-      if(data.loginUser.username){
-          user.username.setUsername(data.loginUser.username)
-          Router.push('/')
-      }
-    }
-  });
-
 
   return ( 
       <div>
@@ -53,12 +40,30 @@ const Login = () => {
       validationSchema={loginSchema}
       onSubmit={(values) =>{
         setIsDisabled(true)
-        loginUser({
+        api.post('/', {
+          query:loginUserMutation, 
           variables: {
-            identity:values.identity,
+            identity: values.identity,
             password: values.password
-          }
+          }    
         })
+        .then(response => {
+          if (response.data.errors){
+            console.log(response.data.errors[0].message)
+            setIsDisabled(false)
+            throw response.data.errors[0].message
+          }else{
+            console.log(response.data.data.loginUser.username)
+            user.username.setUsername(response.data.data.loginUser.username)
+            Router.push('/')
+          }
+          return
+        })
+        .catch((err) => {
+          console.log(err)
+          setErrorAuth(err)
+        })
+
       }}
       >
         {({handleChange, handleSubmit, values, errors, touched, handleBlur}) => (

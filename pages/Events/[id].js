@@ -1,64 +1,64 @@
 import Navbar from "../../Components/Nav/Navbar"
-import { useQuery, useMutation } from "@apollo/client";
-import { GetEventDetails, Booking, CreateBooking } from "../../queries/EventQueries";
+import { api } from "../../services/api";
+import { GetEventDetails, Booking, CreateBooking, GetEvents } from "../../queries/EventQueries";
 import Router, { useRouter } from 'next/router'
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import UserContext from '../../context/UserContext'
 import { Card, Container } from "../../Components/Global";
 
-
-
-
-const EventDetails = () => {
-    const [event, setEvent] = useState('')
-    const [toggle, setToggle] = useState(false)
-    const [creator, setCreator] = useState('boll')
-    const router = useRouter()
-    const { id } = router.query
-    const user = useContext(UserContext)
-    const { data, loading, error } = useQuery(GetEventDetails, {
-        variables: { 
-            id : id
-        },
-    });
-
-    const [BookEvents] = useMutation(CreateBooking, {
-        onCompleted: (data) => {
-            Router.push('/Events/Bookings')
-        }
+export const getStaticPaths = async () => {
+    const response = await api.post('/', { query: GetEvents })
+    const data = await response.data.data
+    const events = await data.events
+    const paths = events.map(event => {
+      return{
+          params: {id: event._id.toString()}
+      }
     })
 
-    const {  } = useQuery(Booking, {
-        variables: { 
-            user: user.userId.userId,
-            event: id
-        },
-        onCompleted: (data) => {
-           if(data.booking){
-             setToggle(true)
-           }
-           
-        }
-    });
+    return{
+        paths,
+        fallback: false
+    }
+}
 
-    useEffect(() => {
-        if(data){
-            setEvent(data.event)
-            if(data.event.user){
-                setCreator(data.event.user._id)
-            }
-        }
-        
-    }, [data])
+export const getStaticProps = async (context) => {
+  const id = context.params.id
+  const response = await api.post('/', {
+    query: GetEventDetails,
+    variables:{
+        id : id
+    }
+  })
+  const data = await response.data.data
+  const event = data.event
 
-    const handleBook = () => {
+  
+  return {
+    props: {
+        event: event,
+        id: id
+    }
+  }
+}
+
+
+
+const EventDetails = ({event, id}) => {
+    const user = useContext(UserContext)
+
+    const handleBook = async () => {
         if (user.userId.userId){
-            BookEvents({
-                variables: {
-                  event: id,
-                  user: user.userId.userId
+            await api.post('/', {
+                query: CreateBooking,
+                variables:{
+                    event: id,
+                    user: user.userId.userId
                 }
+            })
+            .then(response => {
+                Router.push('/Events/Bookings')
             })
         }else{
             Router.push('/User/Login')
@@ -66,7 +66,7 @@ const EventDetails = () => {
         
     }
 
-    if (loading) {
+    if (!event) {
         return <Container><h2><a href="#loading" aria-hidden="true" className="aal_anchor" id="loading"></a>Loading...</h2></Container>;
     }
 
@@ -81,9 +81,15 @@ const EventDetails = () => {
             <p>{event.description}</p>
             <p>₦{event.price}</p>
             <p>{event.date}</p>
-            {!toggle && user.userId.userId !== creator ? <p><TicketPlate onClick={handleBook}>Book Ticket</TicketPlate></p>: ''}
-            {toggle && <p><TicketPlate disabled={true}>Ticket Acquired</TicketPlate></p>}
-            {user.userId.userId === creator && <p><TicketPlate disabled={true}>Created By Me</TicketPlate></p>}
+
+            { user.userId.userId !== event.user._id 
+            ? 
+            <p><TicketPlate onClick={handleBook}>Book Ticket</TicketPlate></p>
+            : ''}
+
+            {user.userId.userId === event.user._id 
+            && 
+            <p><TicketPlate disabled={true}>Created By Me</TicketPlate></p>}
             </Card>
             </Container>
         </div>

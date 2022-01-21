@@ -11,11 +11,11 @@ export default function Home() {
 
   const user = useContext(UserContext)
 
-  const { error } = useQuery(findUser, {
-    onCompleted: (data) => {
-        user.username.setUsername(data.user.username)
-    }
-  });
+  // const { error } = useQuery(findUser, {
+  //   onCompleted: (data) => {
+  //       user.username.setUsername(data.user.username)
+  //   }
+  // });
 
   
   

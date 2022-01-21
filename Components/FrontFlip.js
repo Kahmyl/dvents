@@ -15,7 +15,8 @@ width: 100%;
 height: 100%;
 -webkit-backface-visibility: hidden;
 backface-visibility: hidden;
-background-image: url(${props => (props.url ? props.url : ``)});
-background-color: #cccccc;
+background: url(${props => (props.url ? props.url : '')});
+background-repeat: no-repeat;
+background-size: 450px 200px
 color: black;
 `

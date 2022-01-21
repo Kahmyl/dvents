@@ -2,14 +2,14 @@ import { useState, useContext } from "react";
 import UserContext from '../../context/UserContext'
 import { Formik } from 'formik';
 import Link from "next/link";
-import { useMutation } from "@apollo/client";
 import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
 import Input from "../../Components/FormComp/InputComp";
-import { createUserMutation} from "../../queries/UserQueries";
 import Router from 'next/router'
 import registerSchema from "../../Schema/registerSchema";
 import { ErrorText } from "../../Components/Global";
+import { api } from "../../services/api";
+import { createUserMutation } from "../../queries/UserQueries";
 import {
     MainContainer, 
     WelcomeText, 
@@ -27,21 +27,6 @@ import {
 
   const user = useContext(UserContext)
 
-  const [createUser] = useMutation(createUserMutation, {
-    onError: (error) => {
-      setIsDisabled(false)
-      setErrorAuth(error.message)
-    },
-    onCompleted: (data) => {
-      if(data.createUser.username){
-          user.username.setUsername(data.createUser.username)
-          Router.push('/')
-      }
-    }
-  });
-
-
-
   
     return ( 
     <div>
@@ -54,16 +39,33 @@ import {
           validationSchema={registerSchema}
           onSubmit={(values) =>{
             setIsDisabled(true)
-            createUser({
+            api.post('/', {
+              query:createUserMutation, 
               variables: {
                 username: values.username,
                 email: values.email,
                 password: values.password
+              }    
+            })
+            .then(response => {
+              if (response.data.errors){
+                console.log(response.data.errors[0].message)
+                setIsDisabled(false)
+                throw response.data.errors[0].message
+              }else{
+                console.log(response.data.data.createUser.username)
+                user.username.setUsername(response.data.data.createUser.username)
+                Router.push('/')
               }
+              return
+            })
+            .catch((err) => {
+              console.log(err)
+              setErrorAuth(err)
             })
           }}
           >
-            {({handleChange, handleSubmit, isSubmitting, values, errors, touched, handleBlur}) => (
+            {({handleChange, handleSubmit, values, errors, touched, handleBlur}) => (
               <MainContainer onSubmit={handleSubmit}>
                 <WelcomeText>Sign Up</WelcomeText>
                 <Error>{errorAuth}</Error>
