@@ -12,6 +12,9 @@ const Bookings = () => {
     const user = useContext(UserContext)
 
     useEffect(() => {
+        if (!user.userId.userId){
+            Router.push("/signin")
+        }
         const request = async () => {
             await api.post('/', {
                 query: GetTicket,
