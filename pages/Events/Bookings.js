@@ -14,7 +14,7 @@ const Bookings = () => {
 
     useEffect(() => {
         if (!user.userId.userId){
-            return Router.push("/signin")
+            return Router.push("/User/Login")
         }
         const request = async () => {
             await api.post('/', {
