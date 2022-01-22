@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { api } from "../../services/api";
+import Router from 'next/router'
 import { GetTicket, GetEvents } from "../../queries/EventQueries";
 import { useState, useEffect, useContext } from "react";
 import Navbar from "../../Components/Nav/Navbar";
