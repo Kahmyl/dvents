@@ -235,5 +235,9 @@ export const Card = styled.div`
   max-width: 800px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  h3 {
+    text-align: center;
+  }
 `
