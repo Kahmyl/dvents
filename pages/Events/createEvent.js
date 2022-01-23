@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Formik } from 'formik';
 import Navbar from "../../Components/Nav/Navbar";
 import Button from "../../Components/FormComp/ButtonComp";
 import Input from "../../Components/FormComp/InputComp";
 import { CreateEvents } from "../../queries/EventQueries";
+import { findUser } from "../../queries/UserQueries";
 import Router from 'next/router'
 import UserContext from '../../context/UserContext'
 import eventSchema from "../../Schema/eventSchema";
@@ -23,7 +24,20 @@ const CreateEvent = () => {
     const [isdisabled, setIsDisabled] = useState(false)
 
     const user = useContext(UserContext)
+    
+    useEffect(() => {
+      const fetch = async() => {
+        const response = await api.post('/', { query: findUser })
+        const data = await response.data.data
+        if (data && data.user){
+            return data.user._id
+        }else {
+            return Router.push("/User/Login")
+        }
+      }
 
+      fetch()
+    });
 
     return ( 
         <div>

@@ -47,6 +47,26 @@ export const getStaticProps = async (context) => {
 
 const EventDetails = ({event, id}) => {
     const user = useContext(UserContext)
+    const [toggle, setToggle] = useState(false)
+
+    useEffect(() => {
+        const request = () => {
+            await api.post('/', {
+                query: Booking,
+                variables:{
+                    id : id,
+                    user: user.userId.userId
+                }
+            })
+            .then(response => {
+                const data = response.data.data
+                if (data && data.booking){
+                    setToggle(true)
+                }
+            })
+        }
+        request()
+    }, [user.userId.userId]);
 
     const handleBook = async () => {
         if (user.userId.userId){
@@ -82,7 +102,7 @@ const EventDetails = ({event, id}) => {
             <p>₦{event.price}</p>
             <p>{event.date}</p>
 
-            { user.userId.userId !== event.user._id 
+            { user.userId.userId !== event.user._id && !toggle
             ? 
             <p><TicketPlate onClick={handleBook}>Book Ticket</TicketPlate></p>
             : ''}
@@ -90,6 +110,7 @@ const EventDetails = ({event, id}) => {
             {user.userId.userId === event.user._id 
             && 
             <p><TicketPlate disabled={true}>Created By Me</TicketPlate></p>}
+            {toggle && <p><TicketPlate disabled={true}>Ticket acquired</TicketPlate></p>}
             </Card>
             </Container>
         </div>

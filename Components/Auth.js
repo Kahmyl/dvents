@@ -1,6 +1,7 @@
 import { api } from '../services/api';
 import Router from 'next/router'
 import { findUser } from '../queries/UserQueries';
+import { useState, useEffect, useContext } from "react";
 
 export const getStaticProps = async () => {
     const response = await api.post('/', { query: findUser })
