@@ -54,7 +54,7 @@ const EventDetails = ({event, id}) => {
             await api.post('/', {
                 query: Booking,
                 variables:{
-                    id : id,
+                    event : id,
                     user: user.userId.userId
                 }
             })
