@@ -226,6 +226,7 @@ border-color: #3490dc;
 export const Card = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
