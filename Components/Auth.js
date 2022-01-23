@@ -1,6 +1,6 @@
-import { api } from "../../services/api";
+import { api } from '../services/api';
 import Router from 'next/router'
-import { findUser } from "../../queries/UserQueries";
+import { findUser } from '../queries/UserQueries';
 
 export const getStaticProps = async () => {
     const response = await api.post('/', { query: findUser })
