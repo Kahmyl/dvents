@@ -12,19 +12,25 @@ import FrontFlip from "../../Components/FrontFlip";
 export const getStaticProps = async () => {
     const response = await api.post('/', { query: findUser })
     const data = await response.data.data
-    if (data.user){
-        const result = await api.post('/', {
-            query: GetTicket,
-            variables: {
-                user: data.user._id
-            }
-        })
 
-        const done = await result.data.data
-        const tickets = done.ticket
-        return {
-            props: {tickets: tickets}
+    const request = async () => {
+        if (data.user){
+            const result = await api.post('/', {
+                query: GetTicket,
+                variables: {
+                    user: data.user._id
+                }
+            })
+    
+            const done = await result.data.data
+            const tickets = done.ticket
+            return tickets
         }
+    }
+
+    const tickets = await request()
+    return{
+        props: {tickets: tickets}
     }
 }
 
