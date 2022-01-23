@@ -41,7 +41,7 @@ const Bookings = () => {
         }
         fetch()
         
-    })
+    }, [])
 
     if (tickets && tickets.length == 0){
         return <div><Navbar/><Container><p>No ticket found</p></Container></div>
