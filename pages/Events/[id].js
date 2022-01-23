@@ -98,7 +98,7 @@ const EventDetails = ({event, id}) => {
             <Card>
             <EventImage  src={event.image}/>
             <h3> {event.title} </h3>
-            <Des>{event.descriDestion}</Des>
+            <Des>{event.description}</Des>
             <p>₦{event.price}</p>
             <p>{event.date}</p>
 
