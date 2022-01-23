@@ -7,31 +7,48 @@ import Navbar from "../../Components/Nav/Navbar";
 import UserContext from '../../context/UserContext'
 import { Container } from "../../Components/Global";
 import FrontFlip from "../../Components/FrontFlip";
-const Bookings = () => {
 
-    const [tickets, setTicket] = useState(null)
-    const user = useContext(UserContext)
+export const getStaticProps = async () => {
+    const response = await api.post('/', { query: findUser })
+    const data = await response.data.data
+    if (data.user){
+        const result = await api.post('/', {
+            query: GetTicket,
+            variables: {
+                user: user.userId.userId
+            }
+        })
 
-    useEffect(() => {
-        if (!user.userId.userId){
-            return Router.push("/User/Login")
+        const data = await response.data.data
+        const tickets = data.ticket
+        return {
+            props: {tickets: tickets}
         }
-        const request = async () => {
-            await api.post('/', {
-                query: GetTicket,
-                variables: {
-                    user: user.userId.userId
-                }
-            })
-            .then(response => {
-                const data = response.data.data
-                if (data) {
-                    setTicket(data.ticket)
-                }
-            })
-        }
-        request()
-    }, [user.userId.userId])
+    }
+}
+
+const Bookings = ({tickets}) => {
+
+    // const [tickets, setTicket] = useState(null)
+    // const user = useContext(UserContext)
+
+    // useEffect(() => {
+    //     const request = async () => {
+    //         await api.post('/', {
+    //             query: GetTicket,
+    //             variables: {
+    //                 user: user.userId.userId
+    //             }
+    //         })
+    //         .then(response => {
+    //             const data = response.data.data
+    //             if (data) {
+    //                 setTicket(data.ticket)
+    //             }
+    //         })
+    //     }
+    //     request()
+    // }, [user.userId.userId])
 
     if (tickets && tickets.length == 0){
         return <div><Navbar/><Container><p>No ticket found</p></Container></div>
