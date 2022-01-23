@@ -50,7 +50,7 @@ const EventDetails = ({event, id}) => {
     const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
-        const request = () => {
+        const request = async () => {
             await api.post('/', {
                 query: Booking,
                 variables:{
