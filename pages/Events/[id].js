@@ -5,7 +5,7 @@ import Router, { useRouter } from 'next/router'
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import UserContext from '../../context/UserContext'
-import { Card, Container } from "../../Components/Global";
+import { Card, Container, Des } from "../../Components/Global";
 
 export const getStaticPaths = async () => {
     const response = await api.post('/', { query: GetEvents })
@@ -98,7 +98,7 @@ const EventDetails = ({event, id}) => {
             <Card>
             <EventImage  src={event.image}/>
             <h3> {event.title} </h3>
-            <p>{event.description}</p>
+            <Des>{event.descriDestion}</Des>
             <p>₦{event.price}</p>
             <p>{event.date}</p>
 

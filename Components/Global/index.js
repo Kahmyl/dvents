@@ -237,7 +237,10 @@ export const Card = styled.div`
   margin-left: auto;
   margin-top: 15px;
   margin-bottom: 25px;
-  h3 {
+  p, h3 {
     text-align: center;
   }
+`
+export const Des = styled.span`
+padding: 10px;
 `
