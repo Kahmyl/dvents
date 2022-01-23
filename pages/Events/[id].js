@@ -7,24 +7,24 @@ import { useState, useEffect, useContext } from "react";
 import UserContext from '../../context/UserContext'
 import { Card, Container, Des } from "../../Components/Global";
 
-export const getStaticPaths = async () => {
-    const response = await api.post('/', { query: GetEvents })
-    const data = await response.data.data
-    const events = await data.events
-    const paths = events.map(event => {
-      return{
-          params: {id: event._id.toString()}
-      }
-    })
+// export const getStaticPaths = async () => {
+//     const response = await api.post('/', { query: GetEvents })
+//     const data = await response.data.data
+//     const events = await data.events
+//     const paths = events.map(event => {
+//       return{
+//           params: {id: event._id.toString()}
+//       }
+//     })
 
-    return{
-        paths,
-        fallback: false
-    }
-}
+//     return{
+//         paths,
+//         fallback: false
+//     }
+// }
 
 export const getServerSideProps = async (context) => {
-  const id = context.params.id
+  const { id } = context.query;
   const response = await api.post('/', {
     query: GetEventDetails,
     variables:{
