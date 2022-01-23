@@ -46,8 +46,8 @@ export const CreateBooking = `
 `
 
 export const Booking =`
-  query ($event: ID!){
-    booking(event: $event){
+  query ($event: ID!, $user: ID!){
+    booking(event: $event, user: $user){
       user{
         username
       }
