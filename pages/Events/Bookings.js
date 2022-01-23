@@ -16,11 +16,11 @@ const Bookings = () => {
     const user = useContext(UserContext)
 
     useEffect(() => {
-        const request = async () => {
+        const request = async ({user}) => {
             await api.post('/', {
                 query: GetTicket,
                 variables: {
-                    user: user.userId.userId
+                    user: user
                 }
             })
             .then(response => {
@@ -34,7 +34,7 @@ const Bookings = () => {
             const response = await api.post('/', { query: findUser })
             const data = await response.data.data
             if (data && data.user){
-                return request()
+                return request({user: data.user._id})
             }else {
                 return Router.push("/User/Login")
             }
