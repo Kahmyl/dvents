@@ -11,7 +11,7 @@ export const getStaticProps = async () => {
 }
 
 const Auth = ({data, children}) => {
-    if (data.user){
+    if (data && data.user){
         return <div>{children}</div>
     }else{
         return Router.push("/User/Login")
