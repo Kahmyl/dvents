@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { api } from "../../services/api";
 import Router from 'next/router'
 import { GetTicket, GetEvents } from "../../queries/EventQueries";
+import { findUser } from "../../queries/UserQueries";
 import { useState, useEffect, useContext } from "react";
 import Navbar from "../../Components/Nav/Navbar";
 import UserContext from '../../context/UserContext'
@@ -15,12 +16,12 @@ export const getStaticProps = async () => {
         const result = await api.post('/', {
             query: GetTicket,
             variables: {
-                user: user.userId.userId
+                user: data.user._id
             }
         })
 
-        const data = await response.data.data
-        const tickets = data.ticket
+        const done = await result.data.data
+        const tickets = done.ticket
         return {
             props: {tickets: tickets}
         }
