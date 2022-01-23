@@ -2,60 +2,35 @@ import styled from "styled-components";
 import { api } from "../../services/api";
 import Router from 'next/router'
 import { GetTicket, GetEvents } from "../../queries/EventQueries";
-import { findUser } from "../../queries/UserQueries";
 import { useState, useEffect, useContext } from "react";
 import Navbar from "../../Components/Nav/Navbar";
 import UserContext from '../../context/UserContext'
 import { Container } from "../../Components/Global";
 import FrontFlip from "../../Components/FrontFlip";
+import Auth from "../../Components/Auth";
 
-export const getStaticProps = async () => {
-    const response = await api.post('/', { query: findUser })
-    const data = await response.data.data
+const Bookings = () => {
 
-    const request = async () => {
-        if (data.user){
-            const result = await api.post('/', {
+    const [tickets, setTicket] = useState(null)
+    const user = useContext(UserContext)
+
+    useEffect(() => {
+        const request = async () => {
+            await api.post('/', {
                 query: GetTicket,
                 variables: {
-                    user: data.user._id
+                    user: user.userId.userId
                 }
             })
-    
-            const done = await result.data.data
-            const tickets = done.ticket
-            return tickets
+            .then(response => {
+                const data = response.data.data
+                if (data) {
+                    setTicket(data.ticket)
+                }
+            })
         }
-    }
-
-    const tickets = await request()
-    return{
-        props: {tickets: tickets}
-    }
-}
-
-const Bookings = ({tickets}) => {
-
-    // const [tickets, setTicket] = useState(null)
-    // const user = useContext(UserContext)
-
-    // useEffect(() => {
-    //     const request = async () => {
-    //         await api.post('/', {
-    //             query: GetTicket,
-    //             variables: {
-    //                 user: user.userId.userId
-    //             }
-    //         })
-    //         .then(response => {
-    //             const data = response.data.data
-    //             if (data) {
-    //                 setTicket(data.ticket)
-    //             }
-    //         })
-    //     }
-    //     request()
-    // }, [user.userId.userId])
+        request()
+    }, [user.userId.userId])
 
     if (tickets && tickets.length == 0){
         return <div><Navbar/><Container><p>No ticket found</p></Container></div>
@@ -64,6 +39,7 @@ const Bookings = ({tickets}) => {
     return ( 
         <div>
             <Navbar/>
+            <Auth>
             <Container>
                 {tickets && tickets.map((tickets) => (
                 <Ticket key={tickets._id}>
@@ -81,6 +57,7 @@ const Bookings = ({tickets}) => {
                 </Ticket>
                 ))}
             </Container>
+            </Auth>
         </div>
      );
 }
