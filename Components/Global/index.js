@@ -224,7 +224,7 @@ border-color: #3490dc;
 `
 
 export const Card = styled.div`
-  flex: 1;
+  display: flex;
   justify-content: center;
   color: inherit;
   text-decoration: none;
