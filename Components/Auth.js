@@ -5,6 +5,9 @@ import { findUser } from '../queries/UserQueries';
 export const getStaticProps = async () => {
     const response = await api.post('/', { query: findUser })
     const data = await response.data.data
+    if (data && !data.user){
+        return Router.push("/User/Login")
+    }
     return {
         props: {data: data}
     }
@@ -13,8 +16,6 @@ export const getStaticProps = async () => {
 const Auth = ({data, children}) => {
     if (data && data.user){
         return <div>{children}</div>
-    }else{
-        return Router.push("/User/Login")
     }
 }
 
