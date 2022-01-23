@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { api } from "../../services/api";
 import Router from 'next/router'
 import { GetTicket, GetEvents } from "../../queries/EventQueries";
+import { findUser } from "../../queries/UserQueries";
 import { useState, useEffect, useContext } from "react";
 import Navbar from "../../Components/Nav/Navbar";
 import UserContext from '../../context/UserContext'
@@ -29,7 +30,17 @@ const Bookings = () => {
                 }
             })
         }
-        request()
+        const fetch = async() => {
+            const response = await api.post('/', { query: findUser })
+            const data = await response.data.data
+            if (data && data.user){
+                return request()
+            }else {
+                return Router.push("/User/Login")
+            }
+        }
+        fetch()
+        
     }, [user.userId.userId])
 
     if (tickets && tickets.length == 0){
@@ -39,7 +50,6 @@ const Bookings = () => {
     return ( 
         <div>
             <Navbar/>
-            <Auth>
             <Container>
                 {tickets && tickets.map((tickets) => (
                 <Ticket key={tickets._id}>
@@ -57,7 +67,6 @@ const Bookings = () => {
                 </Ticket>
                 ))}
             </Container>
-            </Auth>
         </div>
      );
 }
