@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
     }
 }
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const id = context.params.id
   const response = await api.post('/', {
     query: GetEventDetails,
