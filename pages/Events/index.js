@@ -7,17 +7,30 @@ import { api } from "../../services/api";
 import { GetEvents } from "../../queries/EventQueries";
 
 
-export const getStaticProps = async () => {
-  const response = await api.post('/', { query: GetEvents })
-  const data = await response.data.data
-  const events = await data.events
+// export const getStaticProps = async () => {
+//   const response = await api.post('/', { query: GetEvents })
+//   const data = await response.data.data
+//   const events = await data.events
 
-  return {
-    props: {events: events}
-  }
-}
+//   return {
+//     props: {events: events}
+//   }
+// }
 
-export default function Event({events}) {
+export default function Event() {
+    
+    const [events, setEvents] = useState(null)
+
+    useEffect(() => {
+      const request = async () => {
+        const response = await api.post('/', { query: GetEvents })
+        const data = await response.data.data
+        if (data) {
+          await setEvents(data.events)
+        }
+      }
+      request()
+    }, []);
   
     if (!events) {
       return <Container><h2><a href="#loading" aria-hidden="true" className="aal_anchor" id="loading"></a>Loading...</h2></Container>;
