@@ -17,6 +17,6 @@ height: 100%;
 backface-visibility: hidden;
 background: url(${props => (props.url ? props.url : '')});
 background-repeat: no-repeat;
-background-size: 450px 200px;
+background-size: 100% 100%;
 color: black;
 `
