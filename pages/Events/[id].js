@@ -35,8 +35,8 @@ export const getServerSideProps = async (context) => {
   const data = await response.data.data
   const event = data.event
   
-  const response = await api.post('/', { query: findUser })
-  const data = await response.data.data
+  const res = await api.post('/', { query: findUser })
+  const data = await res.data.data
   const userID = data.user._id
 
   
