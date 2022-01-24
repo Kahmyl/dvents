@@ -58,6 +58,7 @@ const RightNav = ({ open }) => {
     })
     .then(response => {
       user.username.setUsername('')
+      Router.reload();
     })
   }
 
