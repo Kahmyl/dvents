@@ -34,28 +34,33 @@ export const getServerSideProps = async (context) => {
   })
   const data = await response.data.data
   const event = data.event
-  
-  const res = await api.post('/', { query: findUser })
-  const result = await res.data.data
-  const userID = result.user._id
 
   
   return {
     props: {
         event: event,
-        id: id,
-        userID: userID
+        id: id
     }
   }
 }
 
 
 
-const EventDetails = ({event, id, userID}) => {
+const EventDetails = ({event, id}) => {
     const user = useContext(UserContext)
     const [toggle, setToggle] = useState(false)
+    const [userID, setUserID] = useState('')
 
     useEffect(() => {
+        const fetch = async() => {
+            const response = await api.post('/', { query: findUser })
+            const data = await response.data.data
+            if (data && data.user){
+                setUserID(data.user._id)
+            }
+        }
+        fetch()
+      
         const request = async () => {
             await api.post('/', {
                 query: Booking,
@@ -75,7 +80,7 @@ const EventDetails = ({event, id, userID}) => {
     }, [userID]);
 
     const handleBook = async () => {
-        if (user.userId.userId){
+        if (userID){
             await api.post('/', {
                 query: CreateBooking,
                 variables:{
