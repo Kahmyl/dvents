@@ -22,6 +22,7 @@ import {
 const CreateEvent = () => {
     const [errorAuth, setErrorAuth] = useState('')
     const [isdisabled, setIsDisabled] = useState(false)
+    const [authUser, setAuthUser] = useState('')
 
     const user = useContext(UserContext)
     
@@ -30,6 +31,7 @@ const CreateEvent = () => {
         const response = await api.post('/', { query: findUser })
         const data = await response.data.data
         if (data && data.user){
+            setAuthUser(data.user._id)
             return data.user._id
         }else {
             return Router.push("/User/Login")
@@ -68,7 +70,7 @@ const CreateEvent = () => {
                       title: values.title,
                       description: values.description,
                       price: values.price,
-                      user: user.userId.userId,
+                      user: authUser,
                       image: data.secure_url,
                       date: values.date
                     }
