@@ -1,6 +1,7 @@
 import Navbar from "../../Components/Nav/Navbar"
 import { api } from "../../services/api";
 import { GetEventDetails, Booking, CreateBooking, GetEvents } from "../../queries/EventQueries";
+import { findUser } from "../../queries/UserQueries";
 import Router, { useRouter } from 'next/router'
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
@@ -33,19 +34,24 @@ export const getServerSideProps = async (context) => {
   })
   const data = await response.data.data
   const event = data.event
+  
+  const response = await api.post('/', { query: findUser })
+  const data = await response.data.data
+  const userID = data.user._id
 
   
   return {
     props: {
         event: event,
-        id: id
+        id: id,
+        userID: userID
     }
   }
 }
 
 
 
-const EventDetails = ({event, id}) => {
+const EventDetails = ({event, id, userID}) => {
     const user = useContext(UserContext)
     const [toggle, setToggle] = useState(false)
 
@@ -55,7 +61,7 @@ const EventDetails = ({event, id}) => {
                 query: Booking,
                 variables:{
                     event : id,
-                    user: user.userId.userId
+                    user: userID
                 }
             })
             .then(response => {
@@ -66,7 +72,7 @@ const EventDetails = ({event, id}) => {
             })
         }
         request()
-    }, [user.userId.userId]);
+    }, [userID]);
 
     const handleBook = async () => {
         if (user.userId.userId){
@@ -74,7 +80,7 @@ const EventDetails = ({event, id}) => {
                 query: CreateBooking,
                 variables:{
                     event: id,
-                    user: user.userId.userId
+                    user: userID
                 }
             })
             .then(response => {
@@ -102,12 +108,12 @@ const EventDetails = ({event, id}) => {
             <p>₦{event.price}</p>
             <p>{event.date}</p>
 
-            { user.userId.userId !== event.user._id && !toggle
+            { userID !== event.user._id && !toggle
             ? 
             <p><TicketPlate onClick={handleBook}>Book Ticket</TicketPlate></p>
             : ''}
 
-            {user.userId.userId === event.user._id 
+            {userID === event.user._id 
             && 
             <p><TicketPlate disabled={true}>Created By Me</TicketPlate></p>}
             {toggle && <p><TicketPlate disabled={true}>Ticket acquired</TicketPlate></p>}
