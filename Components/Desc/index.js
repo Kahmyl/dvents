@@ -19,7 +19,7 @@ export default Desc;
 
 
 const FlexContainer = styled.div`
-box-shadow: 0 15px 30px 1px grey;
+box-shadow: 0 5px 10px 5px grey;
 background: rgba(255, 255, 255, 0.90);
 text-align: center;
 border-radius: 5px;
