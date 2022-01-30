@@ -18,17 +18,17 @@ line-height: 1.6;
 border-radius: 0.25rem;
 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 color: #fff;
-background-color: #3490dc;
-border-color: #3490dc;
+background-color: #303030;
+border-color: #303030;
 &:hover{
     color: #fff;
-    background-color: #227dc7;
-    border-color: #2176bd;
+    background-color: #505050;
+    border-color: #505050;
 }
 &:focus{
     color: #fff;
-    background-color: #227dc7;
-    border-color: #2176bd;
+    background-color: #505050;
+    border-color: #505050;
     box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 `
 

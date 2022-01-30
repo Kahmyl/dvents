@@ -5,7 +5,8 @@ import UserContext from '../context/UserContext'
 import { Container, Wrapper } from '../Components/Global'
 import Slider from '../Components/Slider';
 import { findUser } from "../queries/UserQueries";
-
+import Footer from '../Components/Footer';
+import Desc from '../Components/Desc';
 
 export default function Home() {
 
@@ -15,12 +16,14 @@ export default function Home() {
   
   return (
     <div>
-       <Navbar/>
+        <Navbar/>
           <Container>
             <Wrapper>
               <Slider />
             </Wrapper>
+            <Desc/>
           </Container>
+        <Footer/>
     </div>
   )
 }

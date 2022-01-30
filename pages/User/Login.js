@@ -20,6 +20,7 @@ import {
     ForgotPassword,
     Error
 } from "../../Components/FormComp/MainComp"
+import Footer from "../../Components/Footer";
 
 
 const Login = () => {
@@ -97,6 +98,9 @@ const Login = () => {
           </MainContainer>
         )}
       </Formik>
+      </div>
+      <div>
+        <Footer/>
       </div>
   </div> 
   );

@@ -5,6 +5,7 @@ import { Container } from '../../Components/Global'
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { GetEvents } from "../../queries/EventQueries";
+import Footer from "../../Components/Footer";
 
 
 // export const getStaticProps = async () => {
@@ -54,6 +55,7 @@ export default function Event() {
             ))}
           </div>
         </Container>
+      <Footer/>
     </div>
   )
 }

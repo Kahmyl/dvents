@@ -19,6 +19,7 @@ import {
     LoginWith,
     Error
 } from "../../Components/FormComp/MainComp"
+import Footer from "../../Components/Footer";
 
  const Register = () => {
 
@@ -105,6 +106,9 @@ import {
             )}
           </Formik>
         </div>
+      <div>
+        <Footer/>
+      </div>
     </div> 
     );
 }

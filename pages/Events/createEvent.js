@@ -10,6 +10,7 @@ import UserContext from '../../context/UserContext'
 import eventSchema from "../../Schema/eventSchema";
 import { ErrorText } from "../../Components/Global";
 import { api } from "../../services/api";
+import Footer from "../../Components/Footer";
 import {
     MainContainer, 
     WelcomeText, 
@@ -140,6 +141,9 @@ const CreateEvent = () => {
                 </MainContainer>
               )}
             </Formik>
+            </div>
+            <div>
+              <Footer/>
             </div>
         </div>
      );

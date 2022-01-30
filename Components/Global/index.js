@@ -208,38 +208,33 @@ line-height: 1.6;
 border-radius: 0.25rem;
 transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 color: #fff;
-background-color: #3490dc;
-border-color: #3490dc;
+background-color: #303030;
+border-color: #303030;
 &:hover{
     color: #fff;
-    background-color: #227dc7;
-    border-color: #2176bd;
+    background-color: #505050;
+    border-color: #505050;
 }
 &:focus{
     color: #fff;
-    background-color: #227dc7;
-    border-color: #2176bd;
+    background-color: #505050;
+    border-color: #505050;
     box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 }
 `
 
 export const Card = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 800px;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 15px;
-  margin-bottom: 25px;
-  p, h3 {
-    text-align: center;
-  }
+margin: 10px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+overflow: hidden;
+width: 700px;
+margin-left: auto;
+margin-right: auto;
+@media (max-width: 1000px) {
+  width: 100%;
+}
 `
 export const Des = styled.span`
 padding: 10px;

@@ -6,10 +6,17 @@ import { SiDeepnote } from "react-icons/si";
 const Nav = styled.nav`
   width: 100%;
   height: 80px;
-  border-bottom: 2px solid #f1f1f1;
+  box-shadow: 0px 2px 5px #E8E8E8;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  right: 0;
+  background: whitesmoke;
+  margin-bottom: 35px;
+  z-index: 4;
 `
 const Dvent = styled.div`
     display: flex;
