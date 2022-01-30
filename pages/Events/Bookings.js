@@ -9,6 +9,7 @@ import UserContext from '../../context/UserContext'
 import { Container } from "../../Components/Global";
 import FrontFlip from "../../Components/FrontFlip";
 import Auth from "../../Components/Auth";
+import Footer from "../../Components/Footer";
 
 const Bookings = () => {
 
@@ -67,6 +68,7 @@ const Bookings = () => {
                 </Ticket>
                 ))}
             </Container>
+            <Footer/>
         </div>
      );
 }

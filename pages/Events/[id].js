@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import UserContext from '../../context/UserContext'
 import { Card, Container, Des } from "../../Components/Global";
+import Footer from "../../Components/Footer";
 
 // export const getStaticPaths = async () => {
 //     const response = await api.post('/', { query: GetEvents })
@@ -124,6 +125,7 @@ const EventDetails = ({event, id}) => {
             {toggle && <p><TicketPlate disabled={true}>Ticket acquired</TicketPlate></p>}
             </Card>
             </Container>
+            <Footer/>
         </div>
      );
 }
