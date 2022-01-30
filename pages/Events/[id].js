@@ -109,20 +109,25 @@ const EventDetails = ({event, id}) => {
             <Container>
             <Card>
             <EventImage  src={event.image}/>
-            <h3> {event.title} </h3>
-            <Des>{event.description}</Des>
-            <p>₦{event.price}</p>
-            <p>{event.date}</p>
-
-            { userID !== event.user._id && !toggle
-            ? 
-            <p><TicketPlate onClick={handleBook}>Book Ticket</TicketPlate></p>
-            : ''}
-
-            {userID === event.user._id 
-            && 
-            <p><TicketPlate disabled={true}>Created By Me</TicketPlate></p>}
-            {toggle && <p><TicketPlate disabled={true}>Ticket acquired</TicketPlate></p>}
+            <CardBody>
+              <Tag>₦{event.price}</Tag>
+              <h3> {event.title} </h3>
+              <p>{event.description}</p>
+              <Date>
+                <p className="desc">Event Date:</p>
+                <p className="action">{event.date}</p>
+              </Date>
+  
+              { userID !== event.user._id && !toggle
+              ? 
+              <p><TicketPlate onClick={handleBook}>Book Ticket</TicketPlate></p>
+              : ''}
+  
+              {userID === event.user._id 
+              && 
+              <p><TicketPlate disabled={true}>Created By Me</TicketPlate></p>}
+              {toggle && <p><TicketPlate disabled={true}>Ticket acquired</TicketPlate></p>}
+            </CardBody>
             </Card>
             </Container>
             <Footer/>
@@ -162,12 +167,44 @@ border-color: #3490dc;
     border-color: #2176bd;
     box-shadow: 0 0 0 0.2rem rgba(82, 161, 225, 0.5);
 }
-`
+`;
 
 export const EventImage = styled.img`
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
 width: 100%;
-display: inline-block;
-vertical-align: middle;
+height: 300px;
+object-fit: cover;
+`;
+
+export const CardBody = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 20px;
+min-height: 250px;
+p {
+    font-size: 14px;
+    margin: 0 0 40px;
+}
+`
+
+export const Tag = styled.span`
+  border-radius: 50px;
+  font-size: 18px;
+  margin: 0;
+  padding: 2px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: whitesmoke;
+  font-weight: 800;
+`
+export const Date = styled.div`
+display: flex;
+align-items: center;
+.desc{
+    padding-right: 5px;
+}
+.action{
+    padding-left: 5px;
+}
 `

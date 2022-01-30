@@ -13,6 +13,7 @@ const Nav = styled.nav`
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  right: 0;
   background: whitesmoke;
   margin-bottom: 35px;
   z-index: 4;

@@ -32,7 +32,7 @@ const Foot = styled.footer`
     background: #111;
     height: auto;
     width: 100vw;
-    padding-top: 40px;
+    padding-top: 20px;
     color: #fff;
     margin-top: 35px;
 `
@@ -67,20 +67,12 @@ const Ul = styled.ul`
     li{
         margin: 0 10px;
     }
-    a{
-        text-decoration: none;
-        color: #fff;
-        border: 1.1px solid white;
-        padding: 5px;
-        border-radius: 45%;
-        .logo{
-            font-size: 1.1rem;
-            width: 20px;
-            transition: color .4s ease;
-        }
-        &:hover .logo{
-            color: aqua;
-        }
+    .logo{
+        font-size: 1.1rem;
+        transition: color .4s ease;
+    }
+    .logo:hover{
+        color: aqua;
     }
 `
 
@@ -88,7 +80,7 @@ const FootBottom = styled.div`
     background: #000;
     width: 100vw;
     padding: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     text-align: center;
     p{
         font-size: 14px;

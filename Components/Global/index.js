@@ -224,22 +224,17 @@ border-color: #303030;
 `
 
 export const Card = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 800px;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 15px;
-  margin-bottom: 25px;
-  p, h3 {
-    text-align: center;
-  }
+margin: 10px;
+background-color: #fff;
+border-radius: 10px;
+box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+overflow: hidden;
+width: 700px;
+margin-left: auto;
+margin-right: auto;
+@media (max-width: 1000px) {
+  width: 100%;
+}
 `
 export const Des = styled.span`
 padding: 10px;
