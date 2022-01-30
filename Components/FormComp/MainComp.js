@@ -3,7 +3,7 @@ export const MainContainer = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 80vh;
+  height: 100vh;
   width: 30vw;
   margin-right: auto;
   margin-left: auto;
