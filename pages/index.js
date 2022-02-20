@@ -17,10 +17,11 @@ export default function Home() {
   return (
     <div>
         <Navbar/>
+          <Slider />
           <Container>
-            <Wrapper>
+            {/* <Wrapper>
               <Slider />
-            </Wrapper>
+            </Wrapper> */}
             <Desc/>
           </Container>
         <Footer/>

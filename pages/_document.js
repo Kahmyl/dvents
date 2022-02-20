@@ -16,6 +16,9 @@ export default class MyDocument extends Document {
           <Html>
             <Head>
               {this.props.styleTags}
+              <link rel="preconnect" href="https://fonts.googleapis.com"/>
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
+              <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"></link>
             </Head>
             <body>
               <Main />

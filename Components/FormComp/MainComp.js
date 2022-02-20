@@ -1,9 +1,10 @@
 import styled from "styled-components";
 export const MainContainer = styled.form`
   display: flex;
+  font-family: Nunito;
   align-items: center;
   flex-direction: column;
-  height: 80vh;
+  height: 100%;
   width: 30vw;
   margin-right: auto;
   margin-left: auto;
@@ -12,7 +13,7 @@ export const MainContainer = styled.form`
   letter-spacing: 0.4rem;
   @media only screen and (max-width: 320px) {
     width: 80vw;
-    height: 90vh;
+    height: 100%;
     hr {
       margin-bottom: 0.3rem;
     }
@@ -22,27 +23,27 @@ export const MainContainer = styled.form`
   }
   @media only screen and (min-width: 360px) {
     width: 80vw;
-    height: 90vh;
+    height: 100%;
     h4 {
       font-size: small;
     }
   }
   @media only screen and (min-width: 411px) {
     width: 80vw;
-    height: 90vh;
+    height: 100%;
   }
 
   @media only screen and (min-width: 768px) {
     width: 80vw;
-    height: 80vh;
+    height: 100%;
   }
   @media only screen and (min-width: 1024px) {
     width: 70vw;
-    height: 60vh;
+    height: 100%;
   }
   @media only screen and (min-width: 1280px) {
     width: 30vw;
-    height: 80vh;
+    height: 100%;
   }
 `;
 

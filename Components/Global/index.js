@@ -9,6 +9,9 @@ padding-right: 15px;
 padding-left: 15px;
 margin-right: auto;
 margin-left: auto;
+font-family: Nunito;
+margin-top: 35px;
+font-weight: 400;
 @media (min-width: 576px) {
     max-width: 540px;
 }
@@ -185,7 +188,11 @@ padding-top: 10px;
 `
 
 export const SlideWrapper = styled.div`
-height: 80vh;
+background-image: url('https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg');
+margin-top: -1px;
+background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
 `
 
 export const ErrorText = styled.p`

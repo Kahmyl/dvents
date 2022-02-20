@@ -6,8 +6,8 @@ const Desc = () => {
             <Left>
                 <h1>DVENT EVENTS</h1>
                 <p>Create an account now to post your events here and book a ticket to your favourite events</p>
-                <button class="btn">
-                  <span class="buy">Create and account</span>
+                <button className='btn'>
+                  <span className="buy">Create and account</span>
                 </button>
             </Left>
             <Right><img src='https://res.cloudinary.com/hpiddhw8y/image/upload/v1642936002/Cyber-Image-4_hh5qql.jpg'/></Right>

@@ -96,7 +96,7 @@ import Footer from "../../Components/Footer";
                     onChange={handleChange('password')}
                     value={values.password}
                     onBlur={handleBlur('password')}/>
-                </InputContainer>
+                </InputContainer><br/>
                 <ButtonContainer>
                   <Button type="submit" content="Sign Up" disabled={isdisabled} />
                 </ButtonContainer>

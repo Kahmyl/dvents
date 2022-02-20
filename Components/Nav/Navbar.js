@@ -7,6 +7,8 @@ const Nav = styled.nav`
   width: 100%;
   height: 80px;
   box-shadow: 0px 2px 5px #E8E8E8;
+  font-family: Nunito;
+  font-weight: 400;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
@@ -15,7 +17,6 @@ const Nav = styled.nav`
   top: 0;
   right: 0;
   background: whitesmoke;
-  margin-bottom: 35px;
   z-index: 4;
 `
 const Dvent = styled.div`

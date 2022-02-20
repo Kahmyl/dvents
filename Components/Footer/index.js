@@ -26,6 +26,8 @@ const Footer = () => {
 export default Footer;
 
 const Foot = styled.footer`
+    font-family: Nunito;
+    font-weight: 400;
     bottom: 0;
     left: 0;
     right: 0;
