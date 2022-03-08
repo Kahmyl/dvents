@@ -5,7 +5,7 @@ import { SiDeepnote } from "react-icons/si";
 
 const Nav = styled.nav`
   width: 100%;
-  height: 80px;
+  height: 100px;
   box-shadow: 0px 2px 5px #E8E8E8;
   font-family: Nunito;
   font-weight: 400;

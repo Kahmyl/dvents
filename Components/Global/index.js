@@ -209,7 +209,7 @@ text-align: center;
 vertical-align: middle;
 background-color: transparent;
 border: 1px solid transparent;
-padding: 0.395rem 0.75rem;
+padding: 1rem;
 font-size: 0.9rem;
 line-height: 1.6;
 border-radius: 0.25rem;

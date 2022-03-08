@@ -33,7 +33,7 @@ const Foot = styled.footer`
     right: 0;
     background: #111;
     height: auto;
-    width: 100vw;
+    width: 100%;
     padding-top: 20px;
     color: #fff;
     margin-top: 35px;
@@ -80,7 +80,7 @@ const Ul = styled.ul`
 
 const FootBottom = styled.div`
     background: #000;
-    width: 100vw;
+    width: 100%;
     padding: 20px;
     padding-bottom: 20px;
     text-align: center;
